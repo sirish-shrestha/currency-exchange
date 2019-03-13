@@ -14,7 +14,8 @@ type DBConfig struct {
 	Name     string
 }
 
-
+//GetConfig returns the database configurations.
+//Edit the Database configuration here as needed.
 func GetConfig() *Config {
 	return &Config{
 		DB: &DBConfig{

@@ -10,6 +10,7 @@ import (
 	"github.com/jinzhu/gorm"
 
 	"zumata-currency-exchange/app/model"
+	"zumata-currency-exchange/app/dbseeds"
 	"zumata-currency-exchange/config"
 )
 
@@ -21,6 +22,7 @@ type App struct {
 
 // Initialize initializes the app with predefined configuration
 func (a *App) Initialize(config *config.Config) {
+	fmt.Println("Initializing Server..........")
 	dbURI := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		config.DB.Host,
 		config.DB.Port,
@@ -31,11 +33,20 @@ func (a *App) Initialize(config *config.Config) {
 	db, err := gorm.Open(config.DB.Dialect, dbURI)
 	defer db.Close()
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		log.Fatal("Could not connect to database:")
 	}
-
+	//Run the Migrations
+	print("Running Migrations..........")
 	a.DB = model.DBMigrate(db)
+	println("Done.")
+
+	//Run the Database Seeds
+	fmt.Println("Running Database Seeds")
+	dbseeds.ImportRates(db)
+	println("Done.")
+
+	//Define new Chi Router
 	a.Router = chi.NewRouter()
 }
 
