@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/sirish-shrestha/zumata-currency-exchange/app"
-	"github.com/sirish-shrestha/zumata-currency-exchange/config"
+	"zumata-currency-exchange/app"
+	"zumata-currency-exchange/config"
 )
 
 func main() {

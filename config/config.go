@@ -19,10 +19,10 @@ func GetConfig() *Config {
 	return &Config{
 		DB: &DBConfig{
 			Dialect:  "postgres",
-			Host:  "otto.db.elephantsql.com",
-			Port:     4321,	
+			Host:     "otto.db.elephantsql.com",
+			Port:     5432,	
 			Username: "fzjbueum",
-			Password: "7b_4tN3JrmPNRVdN5971HOA8zALMiwRR!",
+			Password: "7b_4tN3JrmPNRVdN5971HOA8zALMiwRR",
 			Name:     "fzjbueum",
 		},
 	}

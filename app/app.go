@@ -2,11 +2,15 @@ package app
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	
 	"github.com/go-chi/chi"
-    "github.com/go-chi/chi/middleware"
+    
 	"github.com/jinzhu/gorm"
 
-	"github.com/sirish-shrestha/zumata-currency-exchange/app/model"
+	"zumata-currency-exchange/app/model"
+	"zumata-currency-exchange/config"
 )
 
 // App has router and db instances
@@ -15,19 +19,20 @@ type App struct {
 	DB     *gorm.DB
 }
 
-
 // Initialize initializes the app with predefined configuration
 func (a *App) Initialize(config *config.Config) {
-	dbURI := fmt.Sprintf("host=%s port=%i user=%s dbname=%s password=%s",
+	dbURI := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		config.DB.Host,
 		config.DB.Port,
 		config.DB.Username,
+		config.DB.Password,
 		config.DB.Name,
-		config.DB.Password)
-
+		)
 	db, err := gorm.Open(config.DB.Dialect, dbURI)
+	defer db.Close()
 	if err != nil {
-		log.Fatal("Could not connect to database")
+		fmt.Println(err)
+		log.Fatal("Could not connect to database:")
 	}
 
 	a.DB = model.DBMigrate(db)
