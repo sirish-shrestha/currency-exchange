@@ -2,9 +2,10 @@ package handler
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/go-chi/chi"
 	"github.com/jinzhu/gorm"
-	"net/http"
 	"github.com/go-chi/render"
 )
 

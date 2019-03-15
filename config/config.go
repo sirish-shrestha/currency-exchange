@@ -19,12 +19,12 @@ type DBConfig struct {
 func GetConfig() *Config {
 	return &Config{
 		DB: &DBConfig{
-			Dialect:  "postgres",
-			Host:     "otto.db.elephantsql.com",
-			Port:     5432,	
-			Username: "fzjbueum",
-			Password: "7b_4tN3JrmPNRVdN5971HOA8zALMiwRR",
-			Name:     "fzjbueum",
+			Dialect:  "postgres",		
+			Host:     "otto.db.elephantsql.com",			//Change the DB Host as needed
+			Port:     5432,									//Change the DB Port as needed.
+			Username: "fzjbueum",							//Change the DB Username as needed.
+			Password: "7b_4tN3JrmPNRVdN5971HOA8zALMiwRR",	//Change the DB Password as needed.
+			Name:     "fzjbueum",							//Change the DB Name as needed.
 		},
 	}
 }

@@ -2,15 +2,15 @@ package dbseeds
 
 import (
 	"bufio"
-	"encoding/xml"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"time"
+	"path/filepath"
+	"encoding/xml"
 
     "github.com/jinzhu/gorm"
 	"github.com/lib/pq"
@@ -108,8 +108,6 @@ func SaveRate(rates []*Rate, db *gorm.DB) {
 	fmt.Println("--------------Saving to Database start")
 	start := time.Now()
 
-	//defer db.DB().Close()*********************
-
 	// db.DB() is done to get generic database object `*sql.DB` to use its functions
 	//START FOR PREPARED STATEMENT WITH TRANSACTION
 	txn, err := db.DB().Begin()
@@ -126,7 +124,6 @@ func SaveRate(rates []*Rate, db *gorm.DB) {
 
 	//Prepared statement for bulk import
 	stmt, err := txn.Prepare(pq.CopyIn("exchange_rates", "currency_symbol", "currency_rate", "currency_date"))
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -158,6 +155,7 @@ func SaveRate(rates []*Rate, db *gorm.DB) {
 	fmt.Println("--------------Saving to Database end")
 }
 
+//ImportRates reads the local downloaded XML file source parses it and calls SaveRate() to save it to database
 func ImportRates(db *gorm.DB) {
 	fmt.Println("Start..........")
 	filename := GetRates()
@@ -187,22 +185,18 @@ func ImportRates(db *gorm.DB) {
 	}
 
 	xmlCubes := xmlEnvelope.Cube
-
 	rates := []*Rate{}
 
 	for i := 0; i < len(xmlCubes.CubeTimes); i++ {
 		cubeTime := xmlCubes.CubeTimes[i]
 		for j := 0; j < len(cubeTime.CubeRates); j++ {
 			cubeRate := cubeTime.CubeRates[j]
-
 			// get values
 			r := new(Rate)
 			r.Time = cubeTime.Time
 			r.Currency = cubeRate.Currency
 			r.Rate = cubeRate.Rate
-
 			rates = append(rates, r)
-
 		}
 	}
 	SaveRate(rates, db)

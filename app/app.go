@@ -8,8 +8,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/render"
-    
-	"github.com/jinzhu/gorm"
+    "github.com/jinzhu/gorm"
 
 	"zumata-currency-exchange/app/model"
 	"zumata-currency-exchange/app/dbseeds"
