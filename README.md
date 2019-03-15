@@ -4,6 +4,7 @@
 Exchange Rate API based on European currency created in GO server
 - Packages Used Chi, Gorm, pq
 - Runs DB Migration(Table Schema) and Seeder(XML URL Source) during Server Initialization
+- 
 
 ## Pre-requisites
 go >= 1.12
@@ -14,12 +15,13 @@ postgresql >= 9.5
 ```
 git clone https://github.com/sirish-shrestha/zumata-currency-exchange.git
 ```
-### Get packages for chi, gorm and pq
+### Get packages for chi, gorm, pq  and testify/assert
 ```
 go get -u github.com/go-chi/chi
 go get -u github.com/go-chi/render
 go get -u github.com/jinzhu/gorm
-go get github.com/lib/pq
+go get -u github.com/lib/pq
+go get -u github.com/stretchr/testify/assert
 ```
 
 ### SetUp Database
@@ -50,7 +52,7 @@ go build main.go
 ```
 ### Test
 ```
-go test main.go
+go test ./...
 ```
 ### Run
 ```
