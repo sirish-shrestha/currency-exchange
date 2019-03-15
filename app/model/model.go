@@ -1,7 +1,7 @@
 package model
 
 import (
-	"time"
+	
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -12,7 +12,7 @@ type ExchangeRates struct {
 	CurrencyRateID		uint64 `gorm:"primary_key"`
 	CurrencySymbol		string `gorm:"type:varchar(3)"`
 	CurrencyRate 		int  `sql:"type:decimal(10,5);"`
-	CurrencyDate		time.Time
+	CurrencyDate		string `sql:"type:date"`
 }
 
 // DBMigrate will create and migrate the table

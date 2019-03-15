@@ -12,7 +12,7 @@ import (
 	"github.com/jinzhu/gorm"
 
 	"zumata-currency-exchange/app/model"
-	/*"zumata-currency-exchange/app/dbseeds"*********************/
+	"zumata-currency-exchange/app/dbseeds"
 	"zumata-currency-exchange/app/handler"
 	"zumata-currency-exchange/config"
 )
@@ -45,7 +45,7 @@ func (a *App) Initialize(config *config.Config) {
 	
 	//Run the Database Seeds
 	fmt.Println("Running Database Seeds")
-	//dbseeds.ImportRates(db)*****************************************************
+	dbseeds.ImportRates(db)
 	
 	//Define new Chi Router
 	a.Router = chi.NewRouter()

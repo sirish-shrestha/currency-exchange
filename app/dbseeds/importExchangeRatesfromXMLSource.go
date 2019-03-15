@@ -108,9 +108,9 @@ func SaveRate(rates []*Rate, db *gorm.DB) {
 	fmt.Println("--------------Saving to Database start")
 	start := time.Now()
 
-	// db.DB() is done to get generic database object `*sql.DB` to use its functions
-	defer db.DB().Close()
+	//defer db.DB().Close()*********************
 
+	// db.DB() is done to get generic database object `*sql.DB` to use its functions
 	//START FOR PREPARED STATEMENT WITH TRANSACTION
 	txn, err := db.DB().Begin()
 	if err != nil {
