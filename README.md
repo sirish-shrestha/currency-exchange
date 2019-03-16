@@ -63,3 +63,12 @@ go test ./...
 ```
 go run main.go
 ```
+
+## API Endpoints
+```
+1. http://localhost:3000/api/v1/rates/latest
+
+2. http://localhost:3000/api/v1/rates/{YYYY-MM-DD}
+
+3. http://localhost:3000/api/v1/rates/analyze
+```

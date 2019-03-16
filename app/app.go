@@ -22,7 +22,7 @@ type App struct {
 	DB     *gorm.DB
 }
 
-// Initialize initializes the app with predefined configuration
+// Initialize initializes the app with database connection, runs migrations and creates routes
 func (a *App) Initialize(config *config.Config) {
 	fmt.Println("Initializing Server..........")
 	dbURI := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
