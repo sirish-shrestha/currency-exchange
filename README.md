@@ -11,11 +11,16 @@ go >= 1.12
 postgresql >= 9.5
 
 ## How to run?
-### Clone from github
+### Clone from github into your $GOPATH/src directory
 ```
 git clone https://github.com/sirish-shrestha/zumata-currency-exchange.git
 ```
 ### Get packages for chi, gorm, pq  and testify/assert
+chi - Efficient Routing with middlewares.
+gorm - ORM library for GO having auto migrations support.
+pq - Pure Go Postgres driver for database/sql, Used for prepared statements.
+testify/assert - Testing tools for Go.
+
 ```
 go get -u github.com/go-chi/chi
 go get -u github.com/go-chi/render
