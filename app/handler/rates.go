@@ -39,6 +39,10 @@ func RateRoutes(db *gorm.DB) *chi.Mux {
 		getrates := AnalyzeRates(db)
 		render.JSON(w, r, getrates)
 	})
+	r.Get("/USDSGD", func(w http.ResponseWriter, r *http.Request) {
+		getrates := GetRatesByUSDSGD(db)
+		render.JSON(w, r, getrates)
+	})
 	return r
 }
 
@@ -72,9 +76,11 @@ func GetLatestRates(db *gorm.DB) map[string]interface{}{
 
 
 //GetRatesByDate fetches the date specific exchange rate from database and returns the formatted output
+//IF exchange rate is not found for a particular date due to holiday, the previous normal day's rate is extracted
 func GetRatesByDate(db *gorm.DB, date string) map[string]interface{}{
 	queryText := fmt.Sprintf(`SELECT currency_symbol, currency_rate from exchange_rates 
-							where currency_date = '%s' order by currency_symbol`,date);
+							where currency_date = (select max(currency_date) from exchange_rates where currency_date<='%s') 
+							order by currency_symbol`,date);
 	rates := make(map[string]float32)
 	outputFormat := map[string]interface{}{
 		"base":"EUR",
@@ -127,5 +133,36 @@ func AnalyzeRates(db *gorm.DB) map[string]interface{}{
 		rates[currency] = aggregateRate
 		outputFormat["rates_analyze"] = rates
 	}
+	return outputFormat
+}
+
+//Returns SGD exchange rate based on USD as base rate
+func GetRatesByUSDSGD(db *gorm.DB) map[string]interface{}{
+	queryText := `select currency_symbol, currency_rate from exchange_rates where currency_date='2019-03-22'and 
+					currency_symbol in('SGD','USD')`
+	rates := map[string]float32{}
+	newrates := map[string]float32{}
+
+	var currency string
+	var rate float32
+	outputFormat := map[string]interface{}{
+		"base":"USD",
+		"rates":map[string]float32{},
+	}
+	rows, err := db.Raw(queryText).Rows()
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err := rows.Scan(&currency, &rate)
+		if err != nil {
+			panic(err)
+		}
+		rates[currency] = rate
+	}
+	//USD TO SGD
+	newrates["SGD"] = rates["SGD"]/rates["USD"]
+	outputFormat["rates"] = newrates
 	return outputFormat
 }

@@ -71,4 +71,7 @@ go run main.go
 2. http://localhost:3000/api/v1/rates/{YYYY-MM-DD}
 
 3. http://localhost:3000/api/v1/rates/analyze
+
+4. http://localhost:3000/api/v1/rates/USDSGD
+- Returns exchange rate of SGD based on USD as base rate.
 ```

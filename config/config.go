@@ -1,10 +1,12 @@
 //Package config allows to set/get the database config
 package config
 
+//Config holds the DBConfig
 type Config struct {
 	DB *DBConfig
 }
 
+//DBConfig holds the database configuration settings
 type DBConfig struct {
 	Dialect  string
 	Host  string
