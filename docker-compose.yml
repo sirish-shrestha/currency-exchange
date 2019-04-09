@@ -1,0 +1,16 @@
+version: '3'
+services:
+  postgres_db:
+    image: postgres
+    environment:
+      POSTGRES_DB: fzjbueum
+      POSTGRES_USER: fzjbueum
+      POSTGRES_PASSWORD: 7b_4tN3JrmPNRVdN5971HOA8zALMiwRR
+
+  golang_app:
+    restart: always
+    build: .
+    volumes:
+            - ./:/go/src/zumata-currency-exchange
+    ports:
+      - "3000:3000"

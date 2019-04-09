@@ -16,13 +16,15 @@ type DBConfig struct {
 	Name     string
 }
 
+
 //GetConfig returns the database configurations.
 //Edit the Database configuration here as needed.
 func GetConfig() *Config {
 	return &Config{
 		DB: &DBConfig{
 			Dialect:  "postgres",		
-			Host:     "otto.db.elephantsql.com",			//Change the DB Host as needed
+			//Host:     "otto.db.elephantsql.com",			//Change the DB Host as needed
+			Host:     "postgres_db",			//Change the DB Host as needed
 			Port:     5432,									//Change the DB Port as needed.
 			Username: "fzjbueum",							//Change the DB Username as needed.
 			Password: "7b_4tN3JrmPNRVdN5971HOA8zALMiwRR",	//Change the DB Password as needed.
