@@ -1,4 +1,4 @@
-# zumata-currency-exchange
+# currency-exchange
 
 ## Introduction
 Exchange Rate API based on European currency created in GO server
@@ -13,7 +13,7 @@ postgresql >= 9.5
 ## How to run?
 ### Clone from github into your $GOPATH/src directory
 ```
-git clone https://github.com/sirish-shrestha/zumata-currency-exchange.git
+git clone https://github.com/sirish-shrestha/currency-exchange.git
 ```
 
 ### SetUp Database
@@ -35,7 +35,7 @@ Currenty connected to the 'postgres_db' docker container.
 
 ### Navigate to root project directory
 ```
-cd /zumata-currency-exchange
+cd /currency-exchange
 ```
 
 ### Run
